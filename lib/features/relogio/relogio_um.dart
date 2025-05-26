@@ -110,9 +110,9 @@ class _RelogioUmState extends State<RelogioUm> {
                           //   },
                         ),
                         // const SizedBox(width: 10),
-                        Text(
+                        const Text(
                           ":",
-                          style: const TextStyle(fontSize: 24),
+                          style: TextStyle(fontSize: 24),
                         ),
                         _buildWheelList(
                           controller: _minuteController,
@@ -127,9 +127,9 @@ class _RelogioUmState extends State<RelogioUm> {
                           //   },
                         ),
                         // const SizedBox(width: 10),
-                        Text(
+                        const Text(
                           ":",
-                          style: const TextStyle(fontSize: 24),
+                          style: TextStyle(fontSize: 24),
                         ),
                         _buildWheelList(
                           controller: _secondController,
@@ -164,7 +164,7 @@ class _RelogioUmState extends State<RelogioUm> {
   }) {
     return SizedBox(
       width: 70,
-      //   height: 74,
+      height: 74,
       child: ListWheelScrollView.useDelegate(
         controller: controller,
         itemExtent: 80,

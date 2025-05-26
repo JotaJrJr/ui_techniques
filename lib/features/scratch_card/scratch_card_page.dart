@@ -77,40 +77,55 @@ class _ScratchCardPageState extends State<ScratchCardPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Revisitar, essa porra só atualiza quando dou hot reload"),
           Center(
-              child: AnimatedBuilder(
-            animation: _viewModel,
-            builder: (_, __) {
-              if (_viewModel.maskImage == null) {
-                return RepaintBoundary(
-                  key: _viewModel.boundaryKey,
-                  child: cover(),
-                );
-              }
-
-              return Stack(
-                children: [
-                  RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _viewModel,
+              builder: (_, __) {
+                if (_viewModel.maskImage == null) {
+                  return RepaintBoundary(
                     key: _viewModel.boundaryKey,
-                    child: overlay(),
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onPanUpdate: (details) => _viewModel.addPoint(details.globalPosition),
-                    onPanStart: (details) => _viewModel.addPoint(details.globalPosition),
-                    onPanEnd: (details) => _viewModel.addPoint(details.globalPosition),
-                    onPanCancel: () => _viewModel.addPoint(Offset.zero),
-                    onTap: () => _viewModel.clear(),
-                    child: CustomPaint(
-                      size: const Size(300, 300),
-                      painter: _ScratchPainter(_viewModel.maskImage!, _viewModel.points),
+                    child: cover(),
+                  );
+                }
+
+                return Stack(
+                  children: [
+                    RepaintBoundary(
+                      key: _viewModel.boundaryKey,
+                      child: overlay(),
                     ),
-                  ),
-                ],
-              );
+                    GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onPanUpdate: (details) => _viewModel.addPoint(details.globalPosition),
+                        onPanStart: (details) => _viewModel.addPoint(details.globalPosition),
+                        onPanEnd: (details) => _viewModel.addPoint(details.globalPosition),
+                        onPanCancel: () => _viewModel.addPoint(Offset.zero),
+                        onTap: () => _viewModel.clear(),
+                        // child: CustomPaint(
+                        //   size: const Size(300, 300),
+                        //   painter: _ScratchPainter(_viewModel.maskImage!, _viewModel.points),
+                        // ),
+
+                        child: ValueListenableBuilder<List<Offset>>(
+                          valueListenable: _viewModel.points,
+                          builder: (_, points, __) {
+                            return CustomPaint(
+                              size: const Size(300, 300),
+                              painter: _ScratchPainter(_viewModel.maskImage!, points),
+                            );
+                          },
+                        )),
+                  ],
+                );
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _viewModel.resetScratch(context);
             },
-          )),
+            child: const Text('Reset'),
+          ),
         ],
       ),
     );
@@ -122,7 +137,7 @@ class _ScratchCardPageState extends State<ScratchCardPage> {
         color: Colors.amber,
         alignment: Alignment.center,
         child: const Text(
-          '🎉 Solta Carta Carai! 🎉',
+          '🎉 Deu bom!!! 🎉',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       );
@@ -131,6 +146,6 @@ class _ScratchCardPageState extends State<ScratchCardPage> {
         width: 300,
         height: 300,
         color: Colors.grey,
-        child: const Center(child: Text('rebola aqui', style: TextStyle(fontSize: 20))),
+        child: const Center(child: Text('Raspe aqui!', style: TextStyle(fontSize: 20))),
       );
 }
