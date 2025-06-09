@@ -4,6 +4,8 @@ import 'package:ui_techniques/features/duolingo_elements/view/duolingo_list_page
 import 'package:ui_techniques/features/duolingo_elements/view/zig_zag_list_page.dart';
 import 'package:ui_techniques/features/relogio/relogio_um.dart';
 import 'package:ui_techniques/features/scratch_card/scratch_card_page.dart';
+import 'package:ui_techniques/features/search_list/search_list_view_model.dart';
+import 'package:ui_techniques/features/search_list/view/search_list_page_mobile.dart';
 import 'package:ui_techniques/features/wheel/models/prize_model.dart';
 import 'package:ui_techniques/features/wheel/view/spinning_wheel_page.dart';
 
@@ -66,11 +68,16 @@ class HomeViewModel {
           Prize(name: 'Prize 6', color: Colors.purple),
         ],
         size: 300,
-        spinDuration: Duration(seconds: 4),
+        spinDuration: const Duration(seconds: 4),
       ),
     ),
-    NavigateToModel(text: "Scratch Card", page: ScratchCardPage()),
-    NavigateToModel(text: "Relógio 1", page: RelogioUm())
+    NavigateToModel(text: "Scratch Card", page: const ScratchCardPage()),
+    NavigateToModel(text: "Relógio 1", page: const RelogioUm()),
+    NavigateToModel(
+        text: "Search List 1",
+        page: SearchListPageMobile(
+          viewModel: SearchListViewModel(),
+        ))
   ];
 }
 
