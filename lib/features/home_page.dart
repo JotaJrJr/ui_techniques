@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui_techniques/features/animated_texts/view/animated_scroll_text_page.dart';
+import 'package:ui_techniques/features/animated_widgets/animated_widgets.dart';
+import 'package:ui_techniques/features/animated_widgets/animated_widgets_view_model.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/duolingo_list_page.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/zig_zag_list_page.dart';
 import 'package:ui_techniques/features/relogio/relogio_um.dart';
@@ -77,7 +79,13 @@ class HomeViewModel {
         text: "Search List 1",
         page: SearchListPageMobile(
           viewModel: SearchListViewModel(),
-        ))
+        )),
+    NavigateToModel(
+      text: "Animated Widgets",
+      page: AnimatedWidgets(
+        viewModel: AnimatedWidgetsViewModel(),
+      ),
+    ),
   ];
 }
 

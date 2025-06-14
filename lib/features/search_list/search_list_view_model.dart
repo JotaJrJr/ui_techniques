@@ -13,6 +13,12 @@ class SearchListViewModel {
     SearchListModel(title: "Title 9", subtitle: "Subtitle 9"),
     SearchListModel(title: "Title 10", subtitle: "Subtitle 10"),
     SearchListModel(title: "Title 11", subtitle: "Um exemplo muito foda fazendo teste para ver se funciona"),
+    // SearchListModel(title: "Title 12", subtitle: "Subtitle 12"),
+    // SearchListModel(title: "Title 13", subtitle: "Subtitle 13"),
+    // SearchListModel(title: "Title 14", subtitle: "Subtitle 14"),
+    // SearchListModel(title: "Title 15", subtitle: "Subtitle 15"),
+    // SearchListModel(title: "Title 16", subtitle: "Subtitle 16"),
+    // SearchListModel(title: "Title 17", subtitle: "Subtitle 17"),
   ];
 
   String query = '';
@@ -24,16 +30,6 @@ class SearchListViewModel {
   }
 
   void filter(String q) {
-    // query = q;
-    // if (q.isEmpty) {
-    //   filteredList.value = List.from(list);
-    // } else {
-    //   final lower = q.toLowerCase();
-    //   filteredList.value = list.where((item) {
-    //     return item.title.toLowerCase().contains(lower) || item.subtitle.toLowerCase().contains(lower);
-    //   }).toList();
-    // }
-
     query = q;
 
     final trimmed = q.trim();
@@ -88,6 +84,7 @@ class TextHighlighter {
 
     final snippet = text.substring(start, end);
     final lowerSnippet = snippet.toLowerCase();
+
     final matchStart = lowerSnippet.indexOf(lowerQuery);
     final matchEnd = matchStart + lowerQuery.length;
 
@@ -134,15 +131,28 @@ class TextHighlighter {
         spans.add(TextSpan(text: text.substring(currentIndex, matchIndex)));
       }
 
-      spans.add(
-        TextSpan(
-          text: text.substring(matchIndex, matchIndex + lowerQuery.length),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            backgroundColor: Colors.yellow,
-          ),
-        ),
-      );
+      final matchText = text.substring(matchIndex, matchIndex + lowerQuery.length);
+
+      if (matchText.toLowerCase() == lowerQuery) {
+        spans.add(TextSpan(
+            text: matchText,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              backgroundColor: Colors.yellow,
+            )));
+      } else {
+        spans.add(TextSpan(text: matchText));
+      }
+
+      //   spans.add(
+      //     TextSpan(
+      //       text: text.substring(matchIndex, matchIndex + lowerQuery.length),
+      //       style: const TextStyle(
+      //         fontWeight: FontWeight.bold,
+      //         backgroundColor: Colors.yellow,
+      //       ),
+      //     ),
+      //   );
 
       currentIndex = matchIndex + lowerQuery.length;
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnimatedScrollTextViewModel extends ChangeNotifier {
-  String text = 'Happy Birthday!';
+  String text = 'Texto pra Teste';
   List<GlobalKey> textKeys = [];
   int? selectedIndex;
   bool isDragging = false;
