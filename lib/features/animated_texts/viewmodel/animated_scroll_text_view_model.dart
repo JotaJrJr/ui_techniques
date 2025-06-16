@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class AnimatedScrollTextViewModel extends ChangeNotifier {
@@ -6,8 +8,14 @@ class AnimatedScrollTextViewModel extends ChangeNotifier {
   int? selectedIndex;
   bool isDragging = false;
 
+  final String textTwo = 'Texto pra Teste...';
+  int? selectedIndexTwo;
+  int _currentIndex = 0;
+  late Timer _timer;
+
   AnimatedScrollTextViewModel() {
     textKeys.addAll(List.generate(text.length, (_) => GlobalKey()));
+    _startAnimation();
   }
 
   void _updateSelectedIndex(Offset position) {
@@ -35,5 +43,18 @@ class AnimatedScrollTextViewModel extends ChangeNotifier {
     isDragging = false;
     selectedIndex = null;
     notifyListeners();
+  }
+
+  void _startAnimation() {
+    _timer = Timer.periodic(const Duration(milliseconds: 200), (_) {
+      selectedIndexTwo = _currentIndex;
+      notifyListeners();
+
+      _currentIndex++;
+      if (_currentIndex >= textTwo.length) {
+        // _timer.cancel();
+        _currentIndex = 0;
+      }
+    });
   }
 }

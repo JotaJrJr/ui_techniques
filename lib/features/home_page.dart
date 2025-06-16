@@ -4,6 +4,7 @@ import 'package:ui_techniques/features/animated_widgets/animated_widgets.dart';
 import 'package:ui_techniques/features/animated_widgets/animated_widgets_view_model.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/duolingo_list_page.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/zig_zag_list_page.dart';
+import 'package:ui_techniques/features/liquid_glass/liquid_glass_page.dart';
 import 'package:ui_techniques/features/relogio/relogio_um.dart';
 import 'package:ui_techniques/features/scratch_card/scratch_card_page.dart';
 import 'package:ui_techniques/features/search_list/search_list_view_model.dart';
@@ -86,6 +87,7 @@ class HomeViewModel {
         viewModel: AnimatedWidgetsViewModel(),
       ),
     ),
+    NavigateToModel(text: "Liquid Glass - Tentativa", page: const LiquidGlassPage()),
   ];
 }
 

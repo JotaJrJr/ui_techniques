@@ -20,7 +20,8 @@ class _AnimatedScrollTextPageState extends State<AnimatedScrollTextPage> {
   double getFontSize(int index) {
     if (_viewModel.selectedIndex == index) {
       return 50;
-    } else if (_viewModel.selectedIndex != null && (index == _viewModel.selectedIndex! - 1 || index == _viewModel.selectedIndex! + 1)) {
+    } else if (_viewModel.selectedIndex != null &&
+        (index == _viewModel.selectedIndex! - 1 || index == _viewModel.selectedIndex! + 1)) {
       return 40;
     } else {
       return 30;
@@ -30,7 +31,8 @@ class _AnimatedScrollTextPageState extends State<AnimatedScrollTextPage> {
   Color getTextColor(int index) {
     if (_viewModel.selectedIndex == index) {
       return Colors.orange;
-    } else if (_viewModel.selectedIndex != null && (index == _viewModel.selectedIndex! - 1 || index == _viewModel.selectedIndex! + 1)) {
+    } else if (_viewModel.selectedIndex != null &&
+        (index == _viewModel.selectedIndex! - 1 || index == _viewModel.selectedIndex! + 1)) {
       return Colors.orange.withOpacity(0.8);
     } else {
       return Colors.white;
@@ -49,42 +51,72 @@ class _AnimatedScrollTextPageState extends State<AnimatedScrollTextPage> {
       body: AnimatedBuilder(
         animation: _viewModel,
         builder: (_, __) {
+          final autoData = _viewModel.textTwo.split('');
+
           return Container(
             color: Colors.black,
-            child: Center(
-              child: GestureDetector(
-                onHorizontalDragUpdate: (details) {
-                  _viewModel.startDrag(details.globalPosition);
-                  setState(() {});
-                },
-                onHorizontalDragEnd: (_) {
-                  _viewModel.stopDrag();
-                },
-                child: Row(
+            child: Column(
+              children: [
+                GestureDetector(
+                  onHorizontalDragUpdate: (details) {
+                    _viewModel.startDrag(details.globalPosition);
+                    setState(() {});
+                  },
+                  onHorizontalDragEnd: (_) {
+                    _viewModel.stopDrag();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(data.length, (index) {
+                      return TweenAnimationBuilder(
+                        key: _viewModel.textKeys[index],
+                        tween: Tween<double>(
+                          begin: 30,
+                          end: getFontSize(index),
+                        ),
+                        duration: const Duration(milliseconds: 100),
+                        builder: (context, size, child) {
+                          return Text(
+                            data[index],
+                            style: TextStyle(
+                              color: getTextColor(index),
+                              fontWeight: FontWeight.w800,
+                              fontSize: size,
+                            ),
+                          );
+                        },
+                      );
+                    }),
+                  ),
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: List.generate(data.length, (index) {
+                  children: List.generate(autoData.length, (index) {
+                    final isSelected = _viewModel.selectedIndexTwo == index;
                     return TweenAnimationBuilder(
-                      key: _viewModel.textKeys[index],
                       tween: Tween<double>(
                         begin: 30,
-                        end: getFontSize(index),
+                        end: isSelected ? 50 : 30,
                       ),
-                      duration: const Duration(milliseconds: 100),
+                      duration: const Duration(milliseconds: 300),
                       builder: (context, size, child) {
-                        return Text(
-                          data[index],
-                          style: TextStyle(
-                            color: getTextColor(index),
-                            fontWeight: FontWeight.w800,
-                            fontSize: size,
+                        return SizedBox(
+                          //   width: 5,
+                          child: Text(
+                            autoData[index],
+                            style: TextStyle(
+                              color: isSelected ? Colors.orange : Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: size,
+                            ),
                           ),
                         );
                       },
                     );
                   }),
                 ),
-              ),
+              ],
             ),
           );
         },
