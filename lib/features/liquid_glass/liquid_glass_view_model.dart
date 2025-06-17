@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 /// Simple model for a draggable glass box (rectangle).
@@ -77,5 +79,34 @@ class LiquidGlassViewModel extends ChangeNotifier {
       }
     }
     return null;
+  }
+
+  FragmentProgram? _shaderProgram;
+//   FragmentShader? _shader;
+
+  Future<void> loadShader() async {
+    try {
+      // Use the correct asset path format
+      _shaderProgram = await FragmentProgram.fromAsset(
+        'assets/shaders/liquid_glass_shader.frag',
+      );
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Shader load failed: $e');
+    }
+  }
+
+  FragmentShader? getShader(Size size) {
+    if (_shaderProgram == null) return null;
+
+    final shader = _shaderProgram!.fragmentShader();
+    shader
+      ..setFloat(0, size.width) // uSize.x
+      ..setFloat(1, size.height) // uSize.y
+      ..setFloat(2, DateTime.now().millisecondsSinceEpoch / 1000) // uTime
+      ..setFloat(3, lightIntensity) // uIntensity
+      ..setFloat(4, cornerDistortion); // uDistortion
+
+    return shader;
   }
 }

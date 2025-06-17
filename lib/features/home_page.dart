@@ -12,6 +12,8 @@ import 'package:ui_techniques/features/search_list/view/search_list_page_mobile.
 import 'package:ui_techniques/features/wheel/models/prize_model.dart';
 import 'package:ui_techniques/features/wheel/view/spinning_wheel_page.dart';
 
+import '2d_list/list_2d.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -88,6 +90,7 @@ class HomeViewModel {
       ),
     ),
     NavigateToModel(text: "Liquid Glass - Tentativa", page: const LiquidGlassPage()),
+    NavigateToModel(text: "2D List", page: const List2d()),
   ];
 }
 
