@@ -4,15 +4,17 @@ import 'package:ui_techniques/features/animated_widgets/animated_widgets.dart';
 import 'package:ui_techniques/features/animated_widgets/animated_widgets_view_model.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/duolingo_list_page.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/zig_zag_list_page.dart';
-import 'package:ui_techniques/features/liquid_glass/liquid_glass_page.dart';
+import 'package:ui_techniques/features/fire_fly/fire_fly_page.dart';
 import 'package:ui_techniques/features/relogio/relogio_um.dart';
 import 'package:ui_techniques/features/scratch_card/scratch_card_page.dart';
 import 'package:ui_techniques/features/search_list/search_list_view_model.dart';
 import 'package:ui_techniques/features/search_list/view/search_list_page_mobile.dart';
+import 'package:ui_techniques/features/wave/wave_page.dart';
 import 'package:ui_techniques/features/wheel/models/prize_model.dart';
 import 'package:ui_techniques/features/wheel/view/spinning_wheel_page.dart';
 
 import '2d_list/list_2d.dart';
+import 'music_name_display/music_name_display_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -84,13 +86,18 @@ class HomeViewModel {
           viewModel: SearchListViewModel(),
         )),
     NavigateToModel(
+      text: "Music Name Display",
+      page: MusicNameDisplayPage(),
+    ),
+    NavigateToModel(
       text: "Animated Widgets",
       page: AnimatedWidgets(
         viewModel: AnimatedWidgetsViewModel(),
       ),
     ),
-    NavigateToModel(text: "Liquid Glass - Tentativa", page: const LiquidGlassPage()),
     NavigateToModel(text: "2D List", page: const List2d()),
+    NavigateToModel(text: "Wave Effect", page: const WavePage()),
+    NavigateToModel(text: "FireFly", page: const FireFlyPage()),
   ];
 }
 
