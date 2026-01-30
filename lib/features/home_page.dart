@@ -5,6 +5,7 @@ import 'package:ui_techniques/features/animated_widgets/animated_widgets_view_mo
 import 'package:ui_techniques/features/duolingo_elements/view/duolingo_list_page.dart';
 import 'package:ui_techniques/features/duolingo_elements/view/zig_zag_list_page.dart';
 import 'package:ui_techniques/features/fire_fly/fire_fly_page.dart';
+import 'package:ui_techniques/features/puzzle_game_effects/puzzle_game_effects_page.dart';
 import 'package:ui_techniques/features/relogio/relogio_um.dart';
 import 'package:ui_techniques/features/scratch_card/scratch_card_page.dart';
 import 'package:ui_techniques/features/search_list/search_list_view_model.dart';
@@ -98,6 +99,9 @@ class HomeViewModel {
     NavigateToModel(text: "2D List", page: const List2d()),
     NavigateToModel(text: "Wave Effect", page: const WavePage()),
     NavigateToModel(text: "FireFly", page: const FireFlyPage()),
+    NavigateToModel(text: "Simple Container Transition", page: const FireFlyPage()),
+    NavigateToModel(text: "Puzzle Game", page: const GhostEffectDemo()),
+
   ];
 }
 
